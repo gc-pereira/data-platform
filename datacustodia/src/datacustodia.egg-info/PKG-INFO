@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: datacustodia
+Version: 0.0.2
+Summary: Pacote python para utilização na plataforma de dados
+Home-page: https://github.com/gc-pereira/data-platform
+Maintainer: Gabriel Pereira
+Maintainer-email: carvalho.gabrielp@gmail.com
+License: MIT License
+Keywords: pyspark,awswrangler,boto3
+Requires-Dist: awswrangler==3.9.1
+Requires-Dist: pydantic
+Requires-Dist: pyspark>=3.0.1
