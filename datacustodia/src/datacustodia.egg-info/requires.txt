@@ -1,0 +1,3 @@
+awswrangler==3.9.1
+pydantic
+pyspark>=3.0.1
