@@ -32,7 +32,7 @@ class MainQualityModel(BaseModel):
 
 
 class ConfigModel(BaseModel):
-    DataLayer: Literal["SOR", "SOT", "SPEC"]
+    DataLayer: Literal["SOR", "SOT", "SPEC", "CSV"]
     TableName: str
     DatabaseName: str
     Machine: MachineModel

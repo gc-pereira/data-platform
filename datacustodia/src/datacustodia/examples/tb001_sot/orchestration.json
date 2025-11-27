@@ -26,10 +26,10 @@
             ],
             "Quality": {
                 "Rules":[
-                    "ColumnValues \"coluna\" in [1,2,3,4]",
+                    "ColumnValues \"contract_id\" > 1",
                     "RowCount > 1000"
                 ],
-                "ReadIfFail": false
+                "ReadIfFail": true
             }
         },
         {
@@ -51,10 +51,10 @@
             ],
             "Quality": {
                 "Rules":[
-                    "ColumnValues \"coluna\" in [1,2,3,4]",
+                    "ColumnValues \"contract_id\" > 1",
                     "RowCount > 1000"
                 ],
-                "ReadIfFail": false
+                "ReadIfFail": true
             }
         },
         {
@@ -76,7 +76,7 @@
             ],
             "Quality": {
                 "Rules":[
-                    "ColumnValues \"coluna\" in [1,2,3,4]",
+                    "ColumnValues \"contract_id\" > 1",
                     "RowCount > 1000"
                 ],
                 "ReadIfFail": false
@@ -85,7 +85,7 @@
     ],
     "Quality": {
         "Rules": [
-            "ColumnValues \"coluna\" in [1,2,3,4]",
+            "ColumnValues \"contract_id\" > 1",
             "RowCount > 1000"
         ],
         "WriteIfFail": true
