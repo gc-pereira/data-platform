@@ -1,7 +1,7 @@
 import sys
 from awsglue.dynamicframe import DynamicFrame
 from awsglue.transforms import *
-
+from awsgluedq.transforms import EvaluateDataQuality
 
 
 class QualityChecks:
@@ -13,7 +13,7 @@ class QualityChecks:
 
     def evaluate(self):
         dyf = DynamicFrame.fromDF(self.df, self.glue_context, "dyf") 
-        EvaluateDataQualityMultiframe = EvaluateDataQuality.process_rows(
+        EvaluateDataQualityMultiframe = EvaluateDataQuality().process_rows(
             frame=dyf,
             ruleset=self.rules,
             publishing_options={

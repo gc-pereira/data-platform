@@ -1,10 +1,10 @@
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from datacustodia.models.enum import DE_PARA_BUCKET_NAME
 
-from datacustodia.readers.catalog_reader import CatalogReader
 from datacustodia.readers.csv_reader import CSVReader
 from datacustodia.readers.parquet_reader import ParquetReader
+from datacustodia.readers.catalog_reader import CatalogReader
+from datacustodia.models.enum import DE_PARA_BUCKET_NAME, CSV_LANDING_BUCKET
 
 
 class Reader:
@@ -50,8 +50,7 @@ class Reader:
     def read(self):
         if self.data_layer == 'CSV':
             print('lendo CSV')
-            path = f"s3://{DE_PARA_BUCKET_NAME[self.config['DataLayer']]}/{self.config['TableName']}/"
-            return CSVReader(context=self.spark).read(path=path)
+            return CSVReader(context=self.spark).read(path=self.path)
         elif self.data_layer in ['SOR', 'SOT', 'SPEC']:
             print('lendo tabelas')
             push_down_predicate = self.__get_predicate(self.config, self.path)

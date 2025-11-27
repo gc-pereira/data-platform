@@ -1,0 +1,32 @@
+{
+    "DataLayer": "CSV",
+    "TableName": "tb004_sor",
+    "DatabaseName": "sor",
+    "Machine": {
+        "Capacity": 2,
+        "Type": "G.1X"
+    },
+    "Dependencies": [
+        {
+            "TableName": "CONTRATOS_%Y%m%d.csv",
+            "DatabaseName": "",
+            "Predicate": [
+            ],
+            "Quality": {
+                "Rules":[
+                    "RowCount > 1000",
+                    "ColumnCount = 12"
+                ],
+                "ReadIfFail": true
+            }
+        }
+    ],
+    "Quality": {
+        "Rules": [
+            "ColumnValues \"contract_id\" > 1",
+            "RowCount > 1000",
+            "ColumnValues \"status\" in [\"Ativo\", \"Inadimplente\", \"Quitado\", \"Cancelado\"]"
+        ],
+        "WriteIfFail": true
+    }
+}
