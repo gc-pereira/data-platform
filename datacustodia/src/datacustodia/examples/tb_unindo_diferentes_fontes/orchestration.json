@@ -1,6 +1,6 @@
 {
     "DataLayer": "SOT",
-    "TableName": "tb001_sot",
+    "TableName": "tb_unindo_diferentes_fontes",
     "DatabaseName": "sot",
     "Machine": {
         "Capacity": 2,

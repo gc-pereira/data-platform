@@ -1,0 +1,93 @@
+{
+    "DataLayer": "SOT",
+    "TableName": "tb_unindo_diferentes_fontes",
+    "DatabaseName": "sot",
+    "Machine": {
+        "Capacity": 2,
+        "Type": "G.1X"
+    },
+    "Dependencies": [
+        {
+            "TableName": "tb001_sor",
+            "DatabaseName": "sor",
+            "Predicate": [
+                {
+                    "PushDown": "anomesdia > {}",
+                    "Type": "Date",
+                    "Filter": -10,
+                    "Pattern": "%Y%m%d"
+                },
+                {
+                    "PushDown": "anomesdia < {}",
+                    "Type": "Date",
+                    "Filter": -2,
+                    "Pattern": "%Y%m%d"
+                }
+            ],
+            "Quality": {
+                "Rules":[
+                    "ColumnValues \"contract_id\" > 1",
+                    "RowCount > 1000"
+                ],
+                "ReadIfFail": true
+            }
+        },
+        {
+            "TableName": "tb002_sor",
+            "DatabaseName": "sor",
+            "Predicate": [
+                {
+                    "PushDown": "anomesdia > {}",
+                    "Type": "Date",
+                    "Filter": -10,
+                    "Pattern": "%Y%m%d"
+                },
+                {
+                    "PushDown": "anomesdia < {}",
+                    "Type": "Date",
+                    "Filter": -2,
+                    "Pattern": "%Y%m%d"
+                }
+            ],
+            "Quality": {
+                "Rules":[
+                    "ColumnValues \"contract_id\" > 1",
+                    "RowCount > 1000"
+                ],
+                "ReadIfFail": true
+            }
+        },
+        {
+            "TableName": "tb003_sor",
+            "DatabaseName": "sor",
+            "Predicate": [
+                {
+                    "PushDown": "anomesdia > {}",
+                    "Type": "Date",
+                    "Filter": -10,
+                    "Pattern": "%Y%m%d"
+                },
+                {
+                    "PushDown": "anomesdia < {}",
+                    "Type": "Date",
+                    "Filter": -2,
+                    "Pattern": "%Y%m%d"
+                }
+            ],
+            "Quality": {
+                "Rules":[
+                    "ColumnValues \"contract_id\" > 1",
+                    "RowCount > 1000"
+                ],
+                "ReadIfFail": false
+            }
+        }
+    ],
+    "Quality": {
+        "Rules": [
+            "ColumnValues \"contract_id\" > 1",
+            "RowCount > 1000"
+        ],
+        "WriteIfFail": true
+    }
+}
