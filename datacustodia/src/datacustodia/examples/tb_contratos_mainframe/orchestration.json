@@ -1,6 +1,6 @@
 {
     "DataLayer": "CSV",
-    "TableName": "tb004_sor",
+    "TableName": "tb_contratos_mainframe",
     "DatabaseName": "sor",
     "Machine": {
         "Capacity": 2,
@@ -14,8 +14,7 @@
             ],
             "Quality": {
                 "Rules":[
-                    "RowCount > 1000",
-                    "ColumnCount = 12"
+                    "RowCount > 1000"
                 ],
                 "ReadIfFail": true
             }
@@ -23,7 +22,6 @@
     ],
     "Quality": {
         "Rules": [
-            "ColumnValues \"contract_id\" > 1",
             "RowCount > 1000",
             "ColumnValues \"status\" in [\"Ativo\", \"Inadimplente\", \"Quitado\", \"Cancelado\"]"
         ],

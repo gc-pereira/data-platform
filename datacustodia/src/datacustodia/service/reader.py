@@ -2,6 +2,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from datacustodia.readers.csv_reader import CSVReader
+from datacustodia.spark.schema_cast import SchemaCaster
 from datacustodia.readers.parquet_reader import ParquetReader
 from datacustodia.readers.catalog_reader import CatalogReader
 from datacustodia.models.enum import DE_PARA_BUCKET_NAME, CSV_LANDING_BUCKET
@@ -14,7 +15,7 @@ class Reader:
         self.spark = spark
         self.glue_context = glue_context
         self.config = config
-        self.path = kwargs.get('path')   
+        self.path = kwargs.get('path')
 
     
     def __construct_predicate(self, predicate_template: list):
@@ -50,7 +51,8 @@ class Reader:
     def read(self):
         if self.data_layer == 'CSV':
             print('lendo CSV')
-            return CSVReader(context=self.spark).read(path=self.path)
+            schema = SchemaCaster().get_spark_schema(table=self.config['TableName'], database=self.config['DatabaseName'])
+            return CSVReader(spark=self.spark, schema=schema).read(path=self.path)
         elif self.data_layer in ['SOR', 'SOT', 'SPEC']:
             print('lendo tabelas')
             push_down_predicate = self.__get_predicate(self.config, self.path)

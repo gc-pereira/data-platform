@@ -11,7 +11,9 @@ from pyspark.sql.types import (
     DoubleType,
     TimestampType,
     DateType,
-    DecimalType
+    DecimalType,
+    StructType,
+    StructField
 )
 
 class SchemaCaster:
@@ -85,4 +87,15 @@ class SchemaCaster:
     def cast(self, df, db, table):
         glue_schema = self.get_glue_schema(db, table)
         return self.cast_dataframe(df, glue_schema)
+    
+    
+    def get_spark_schema(self, database, table):
+        glue_schema = self.get_glue_schema(database, table)
+        struct_fields = []
+        for col in glue_schema:
+            col_name = col["Name"]
+            col_type = col["Type"]
+            spark_type = self.map_glue_type_to_spark(col_type)
+            struct_fields.append(StructField(col_name, spark_type, True))
+        return StructType(struct_fields)
         
