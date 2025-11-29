@@ -86,7 +86,7 @@
     "Quality": {
         "Rules": [
             "ColumnValues \"fonte\" in [\"MAINFRAME\", \"MOBILE\", \"EXTERNOS\"]",
-            "RowCount > 1000"
+            "RowCount < 10"
         ],
         "WriteIfFail": false
     }
