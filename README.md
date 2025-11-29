@@ -93,7 +93,7 @@ datacustodia/src/datacustodia/pipeline.py
 ```
 
 <p align="center">
-    <img src="images/dq.gif" alt="Data Quality validation (dq.gif)" />
+    <img src="images/dataquality.gif" alt="Data Quality validation (dataquality.gif)" />
 </p>
 
 a principal ideia é criar um fluxo que utilize poucas configurações para funcionamento e a plataforma cuide de problemas como small files e atualização das partições.
@@ -816,7 +816,7 @@ spark.stop()
 ```
 
 <p align="center">
-    <img src="images/iceberg.gif" alt="Idempotência do job (idempotencia.gif)" />
+    <img src="images/tabelas_iceberg.gif" alt="Idempotência do job (idempotencia.gif)" />
 </p>
 
 ------------------------------------------------------------------------
