@@ -8,32 +8,32 @@
     },
     "Dependencies": [
         {
-            "TableName": "tb001_sor",
+            "TableName": "tb_contratos_mainframe",
             "DatabaseName": "sor",
             "Predicate": [
                 {
-                    "PushDown": "anomesdia > {}",
-                    "Type": "Date",
-                    "Filter": -10,
-                    "Pattern": "%Y%m%d"
-                },
-                {
-                    "PushDown": "anomesdia < {}",
+                    "PushDown": "last_update_date >= '{} 00:00:00.000'",
                     "Type": "Date",
                     "Filter": -2,
-                    "Pattern": "%Y%m%d"
+                    "Pattern": "%Y-%m-%d"
+                },
+                {
+                    "PushDown": "last_update_date < '{} 23:59:59.000'",
+                    "Type": "Date",
+                    "Filter": 0,
+                    "Pattern": "%Y-%m-%d"
                 }
             ],
             "Quality": {
                 "Rules":[
-                    "ColumnValues \"contract_id\" > 1",
-                    "RowCount > 1000"
+                    "DistinctValuesCount \"contract_id\" > 1",
+                    "RowCount > 100"
                 ],
                 "ReadIfFail": true
             }
         },
         {
-            "TableName": "tb002_sor",
+            "TableName": "tb_contratos_mobile",
             "DatabaseName": "sor",
             "Predicate": [
                 {
@@ -45,20 +45,20 @@
                 {
                     "PushDown": "anomesdia < {}",
                     "Type": "Date",
-                    "Filter": -2,
+                    "Filter": 0,
                     "Pattern": "%Y%m%d"
                 }
             ],
             "Quality": {
                 "Rules":[
-                    "ColumnValues \"contract_id\" > 1",
-                    "RowCount > 1000"
+                    "DistinctValuesCount \"contract_id\" > 1",
+                    "RowCount > 100"
                 ],
                 "ReadIfFail": true
             }
         },
         {
-            "TableName": "tb003_sor",
+            "TableName": "tb_dados_externos",
             "DatabaseName": "sor",
             "Predicate": [
                 {
@@ -70,24 +70,24 @@
                 {
                     "PushDown": "anomesdia < {}",
                     "Type": "Date",
-                    "Filter": -2,
+                    "Filter": 0,
                     "Pattern": "%Y%m%d"
                 }
             ],
             "Quality": {
                 "Rules":[
-                    "ColumnValues \"contract_id\" > 1",
-                    "RowCount > 1000"
+                    "DistinctValuesCount \"contract_id\" > 1",
+                    "RowCount > 100"
                 ],
-                "ReadIfFail": false
+                "ReadIfFail": true
             }
         }
     ],
     "Quality": {
         "Rules": [
-            "ColumnValues \"contract_id\" > 1",
+            "ColumnValues \"fonte\" in [\"MAINFRAME\", \"MOBILE\", \"EXTERNOS\"]",
             "RowCount > 1000"
         ],
-        "WriteIfFail": true
+        "WriteIfFail": false
     }
 }
