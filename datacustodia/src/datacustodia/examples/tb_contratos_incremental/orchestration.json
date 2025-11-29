@@ -1,0 +1,93 @@
+{
+    "DataLayer": "SOT",
+    "TableName": "tb_contratos_incremental",
+    "DatabaseName": "sot",
+    "Machine": {
+        "Capacity": 2,
+        "Type": "G.1X"
+    },
+    "Dependencies": [
+        {
+            "TableName": "tb_contratos_mainframe",
+            "DatabaseName": "sor",
+            "Predicate": [
+                {
+                    "PushDown": "last_update_date >= '{} 00:00:00.000'",
+                    "Type": "Date",
+                    "Filter": -2,
+                    "Pattern": "%Y-%m-%d"
+                },
+                {
+                    "PushDown": "last_update_date < '{} 23:59:59.000'",
+                    "Type": "Date",
+                    "Filter": 0,
+                    "Pattern": "%Y-%m-%d"
+                }
+            ],
+            "Quality": {
+                "Rules":[
+                    "DistinctValuesCount \"contract_id\" > 1",
+                    "RowCount > 100"
+                ],
+                "ReadIfFail": true
+            }
+        },
+        {
+            "TableName": "tb_contratos_mobile",
+            "DatabaseName": "sor",
+            "Predicate": [
+                {
+                    "PushDown": "anomesdia > {}",
+                    "Type": "Date",
+                    "Filter": -10,
+                    "Pattern": "%Y%m%d"
+                },
+                {
+                    "PushDown": "anomesdia < {}",
+                    "Type": "Date",
+                    "Filter": 0,
+                    "Pattern": "%Y%m%d"
+                }
+            ],
+            "Quality": {
+                "Rules":[
+                    "DistinctValuesCount \"contract_id\" > 1",
+                    "RowCount > 100"
+                ],
+                "ReadIfFail": true
+            }
+        },
+        {
+            "TableName": "tb_dados_externos",
+            "DatabaseName": "sor",
+            "Predicate": [
+                {
+                    "PushDown": "anomesdia > {}",
+                    "Type": "Date",
+                    "Filter": -10,
+                    "Pattern": "%Y%m%d"
+                },
+                {
+                    "PushDown": "anomesdia < {}",
+                    "Type": "Date",
+                    "Filter": 0,
+                    "Pattern": "%Y%m%d"
+                }
+            ],
+            "Quality": {
+                "Rules":[
+                    "DistinctValuesCount \"contract_id\" > 1",
+                    "RowCount > 100"
+                ],
+                "ReadIfFail": true
+            }
+        }
+    ],
+    "Quality": {
+        "Rules": [
+            "ColumnValues \"fonte\" in [\"MAINFRAME\", \"MOBILE\", \"EXTERNOS\"]",
+            "RowCount > 1000"
+        ],
+        "WriteIfFail": true
+    }
+}
